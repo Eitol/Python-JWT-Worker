@@ -13,12 +13,12 @@ class JWTWorker:
         # PUBLIC
         self.api_token = None
         self.credentials = credentials
-        self.refresh_time = DEFAULT_JWT_EXPIRATION_TIME
-        # Callbacks
-        self.on_auth = lambda: None
-        self.on_refresh = lambda: None
-        self.on_auth_failed = lambda: None
-        self.on_refresh_failed = lambda: None
+        self.refresh_time = refresh_time if refresh_time is not 0 else DEFAULT_JWT_EXPIRATION_TIME
+        # Callbacks (You can change it) (they are functions without parameters)
+        self.on_auth = lambda: None  # runs when an authentication occurs
+        self.on_refresh = lambda: None  # runs when an refresh token occurs
+        self.on_auth_failed = lambda: None  # run when an authentication fails
+        self.on_refresh_failed = lambda: None  # run when an refresh token fails
 
     def auth(self, __=None):
         """ Get new token from the server """
@@ -55,4 +55,5 @@ class JWTWorker:
         pyglet.clock.schedule_interval(self.refresh_token, self.refresh_time)
         t = threading.Thread(target=lambda: pyglet.app.run())
         t.daemon = True  # thread dies when main thread (only non-daemon thread) exits.
-        t.start() 
+        t.start()
+
