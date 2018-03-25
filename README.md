@@ -1,7 +1,5 @@
-# Python-JWT-Worker
-
 <p align="center">
-  <h3 align="center">ConfigDB</h3>
+  <h3 align="center">Python JWTWorker</h3>
 
   <p align="center">
     This python 3 class is responsible for authenticating and then refreshing a JWT token for you
@@ -16,6 +14,8 @@ The following sample code shows common usage.
 First ask for a token using some credentials (User - password).
 Then, every 10 minutes, refresh the token
 
+![](jwt.png)
+
 ```python
 CREDENTIALS = {
     "email": "user@example.com",
@@ -26,7 +26,7 @@ BASE_URL = 'https://crazyurl.com/api'
 MEASURE_ENDPOINT = '/data'
 AUTH_ENDPOINT = '/login'
 REFRESH_TOKEN_ENDPOINT = '/token/refresh'
-TOKEN_REFRESH_TIME = 1  # in Segs
+TOKEN_REFRESH_TIME = 10 * 60  # in Segs
 
 jwt = JWTWorker(
     CREDENTIALS,
@@ -38,4 +38,4 @@ jwt.run()
 time.sleep(TOKEN_REFRESH_TIME * 5)
 ```
 
-![](jwt.png)
+
